@@ -1,18 +1,18 @@
-{
-  "cli": {
-    "version": ">= 0.55.1"
-  },
+{"cli": { "requireCommit": true }, 
   "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
-    },
     "preview": {
-      "distribution": "internal"
+      "android": {
+        "buildType": "apk"
+      }
     },
-    "production": {}
-  },
-  "submit": {
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
+    },
     "production": {}
   }
 }
