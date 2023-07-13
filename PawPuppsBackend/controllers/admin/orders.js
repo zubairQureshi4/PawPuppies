@@ -38,7 +38,6 @@ module.exports.getCurrentDate = async () => {
 
 module.exports.changeStatusOfOrder = async (req, res) => {
     try{
-
         const {status, orderId} = req.query
 
         if(!orderId || !status){

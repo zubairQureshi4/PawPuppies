@@ -2,7 +2,6 @@ const multer  = require('multer')
 
 module.exports.uploadFile = async (req, res, next) => {
     try {
-        console.log("DSf")
         const storage = multer.diskStorage({
             destination: function (req, file, cb) {
               cb(null, 'public/storage/')

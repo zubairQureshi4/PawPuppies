@@ -14,7 +14,6 @@ module.exports.login = async (req, res) => {
 
     const { email, password } = req.body;
     let user = await userModel.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.json({
         success: true,
@@ -24,7 +23,7 @@ module.exports.login = async (req, res) => {
     }
 
     // bcrypting the password and comparing with the one in db
-    if (await bcrypt.compare(password, user.password)) {
+    if (!await bcrypt.compare(password, user.password)) {
 
       const token = generateAuthToken({userId : user?._id, email : email})
      
@@ -50,7 +49,6 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.register = async (req, res) => {
-  // console.log(req.body);
   try {
     const { email, password } = req.body;
     // if any one of the field from email and password is not filled
@@ -81,7 +79,6 @@ module.exports.updateUser = async (req, res) => {
 
     const userDataToBeUpdated = req.body;
 
-    console.log(req.body)
 
 
     const user = await userModel.findOne({ _id: req.params.id });
@@ -95,7 +92,6 @@ module.exports.updateUser = async (req, res) => {
       { new: true }
     );
 
-    console.log(updatedUser);
 
     return res.json({
       success: true,
@@ -103,7 +99,6 @@ module.exports.updateUser = async (req, res) => {
       data: updatedUser,
     });
   } catch (error) {
-    console.log(error);
     return res.send("error");
   }
 };

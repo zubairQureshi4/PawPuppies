@@ -1,3 +1,3 @@
 export default network = {
-   serverip: "https://nine-facts-hope.loca.lt",
+   serverip: "http://192.168.100.6:3000"
 };

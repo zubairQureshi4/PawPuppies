@@ -66,6 +66,7 @@ const CheckoutScreen = ({ navigation, route }) => {
     });
 
     var raw = JSON.stringify({
+      user: user,
       items: payload,
       amount: totalamount,
       discount: 0,

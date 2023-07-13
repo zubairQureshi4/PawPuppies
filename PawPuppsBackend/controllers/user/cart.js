@@ -5,10 +5,9 @@ const {ObjectId} = require('mongodb');
 
 module.exports.checkout = async (req, res) => {
     try{
-        
         var body = req.body;
         const user = req.user
-
+        
         body.user = user?._id
         body.orderId = (Math.floor(Math.random() * 1000000000)).toString();
 

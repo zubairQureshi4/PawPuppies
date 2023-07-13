@@ -23,6 +23,17 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import CustomInput from "../../components/CustomInput";
 
 const CategoriesScreen = ({ navigation, route }) => {
+  const [category , setCategory] = useState([])
+
+
+
+  const getCategories = async ()=>{
+    await axios.get(network.serverip + "/categories").then(res => console.log(res.data?.categories)).catch(err => console.log("category error"+err))
+  }
+
+  useEffect(()=>{
+    getCategories()
+  },[])
   const { categoryID } = route.params;
 
   const [isLoading, setLoading] = useState(true);
@@ -66,36 +77,36 @@ const CategoriesScreen = ({ navigation, route }) => {
     method: "GET",
     redirect: "follow",
   };
-  const category = [
-    {
-      _id: "62fe244f58f7aa8230817f89",
-      title: "Cats",
-      image: require("../../assets/icons/cats.png"),
-    },
-    {
-      _id: "62fe243858f7aa8230817f86",
-      title: "Dogs",
-      image: require("../../assets/icons/dogs.png"),
-    },
-    {
-      _id: "62fe241958f7aa8230817f83",
-      title: "Vaccination",
-      image: require("../../assets/icons/cats.png"),
-    },
-  /* {
-      _id: "62fe246858f7aa8230817f8c",
-      title: "Groceries",
-      image: require("../../assets/icons/grocery.png"),
-    },*/
-  ];
+  // const category = [
+  //   {
+  //     _id: "62fe244f58f7aa8230817f89",
+  //     title: "Cats",
+  //     image: require("../../assets/icons/cats.png"),
+  //   },
+  //   {
+  //     _id: "62fe243858f7aa8230817f86",
+  //     title: "Dogs",
+  //     image: require("../../assets/icons/dogs.png"),
+  //   },
+  //   {
+  //     _id: "62fe241958f7aa8230817f83",
+  //     title: "Vaccination",
+  //     image: require("../../assets/icons/cats.png"),
+  //   },
+  // /* {
+  //     _id: "62fe246858f7aa8230817f8c",
+  //     title: "Groceries",
+  //     image: require("../../assets/icons/grocery.png"),
+  //   },*/
+  // ];
   const [selectedTab, setSelectedTab] = useState(category[0]);
-
   //method to fetch the product from server using API call
   const fetchProduct = () => {
     var headerOptions = {
       method: "GET",
       redirect: "follow",
     };
+    
     fetch(`${network.serverip}/products`, headerOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -143,7 +154,7 @@ const CategoriesScreen = ({ navigation, route }) => {
   useEffect(() => {
     fetchProduct();
   }, []);
-
+console.log(category);
   return (
     <View style={styles.container}>
       <StatusBar></StatusBar>
@@ -252,7 +263,7 @@ const CategoriesScreen = ({ navigation, route }) => {
                 <ProductCard
                   cardSize={"large"}
                   name={product.title}
-                  image={`${network.serverip}/uploads/${product.image}`}
+                  image={product.image}
                   price={product.price}
                   quantity={product.quantity}
                   onPress={() => handleProductPress(product)}

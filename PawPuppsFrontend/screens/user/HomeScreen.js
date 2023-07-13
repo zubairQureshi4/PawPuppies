@@ -23,29 +23,30 @@ import { bindActionCreators } from "redux";
 import * as actionCreaters from "../../states/actionCreaters/actionCreaters";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { SliderBox } from "react-native-image-slider-box";
+import axios from "axios";
 
-const category = [
-  {
-    _id: "62fe244f58f7aa8230817f89",
-    title: "Cats",
-    image: require("../../assets/icons/cats.png"),
-  },
-  {
-    _id: "62fe243858f7aa8230817f86",
-    title: "Dogs",
-    image: require("../../assets/icons/dogs.png"),
-  },
-  {
-    _id: "62fe241958f7aa8230817f83",
-    title: "Vaccination",
-    image: require("../../assets/icons/cats.png"),
-  },
- /* {
-    _id: "62fe246858f7aa8230817f8c",
-    title: "Groceries",
-    image: require("../../assets/icons/grocery.png"),
-  }, */
-];
+// const category = [
+//   {
+//     _id: "62fe244f58f7aa8230817f89",
+//     title: "Cats",
+//     image: require("../../assets/icons/cats.png"),
+//   },
+//   {
+//     _id: "62fe243858f7aa8230817f86",
+//     title: "Dogs",
+//     image: require("../../assets/icons/dogs.png"),
+//   },
+//   {
+//     _id: "62fe241958f7aa8230817f83",
+//     title: "Vaccination",
+//     image: require("../../assets/icons/cats.png"),
+//   },
+//   {
+//     _id: "62fe246858f7aa8230817f8c",
+//     title: "Groceries",
+//     // image: require("../../assets/icons/grocery.png"),
+//   }, 
+// ];
 
 const slides = [
   require("../../assets/image/banners/banner.png"),
@@ -53,6 +54,16 @@ const slides = [
 ];
 
 const HomeScreen = ({ navigation, route }) => {
+  const [category, setCategory] = useState([]);
+
+  const getCategories = async ()=>{
+    await axios.get(network.serverip + "/categories").then(res => setCategory(res.data?.categories)).catch(err => console.log("category error"+err))
+  }
+
+  useEffect(()=>{
+    getCategories()
+  },[])
+
   const cartproduct = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -265,8 +276,8 @@ const HomeScreen = ({ navigation, route }) => {
                     style={{ marginLeft: 5, marginBottom: 10, marginRight: 5 }}
                   >
                     <ProductCard
-                      name={item.title}
-                      image={`${network.serverip}/uploads/${item.image}`}
+                      name={item?.title}
+                      image={item?.image}
                       price={item.price}
                       quantity={item.quantity}
                       onPress={() => handleProductPress(item)}

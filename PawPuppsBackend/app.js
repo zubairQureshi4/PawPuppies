@@ -101,7 +101,6 @@ app.post('/photos/upload', upload.array('photos', 12), function (req, res, next)
 
   try{
     let files = req.files;
-    console.log(req);
     if(!files.length){
       return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
     }

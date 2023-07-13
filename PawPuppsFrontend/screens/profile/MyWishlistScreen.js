@@ -167,7 +167,7 @@ import {
             {wishlist?.map((list, index) => {
               return (
                 <WishList
-                  image={`${network.serverip}/uploads/${list?.productId?.image}`}
+                  image={list?.productId?.image}
                   title={list?.productId?.title}
                   description={list?.productId?.description}
                   key={index}
