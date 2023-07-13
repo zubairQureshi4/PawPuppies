@@ -189,7 +189,6 @@ const ViewProductScreen = ({ navigation, route }) => {
           <Text>{`No product found with the name of ${filterItem}!`}</Text>
         ) : (
           foundItems.map((product, index) => {
-            console.log(product.image)
             return (
               <ProductList
                 key={index}

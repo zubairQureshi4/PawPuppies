@@ -110,12 +110,12 @@ const EditProductScreen = ({ navigation, route }) => {
 
   // set all the input fields and image on initial render
   useEffect(() => {
-    setImage(`${network.serverip}/uploads/${product?.image}`);
-    setTitle(product.title);
-    setSku(product.sku);
-    setQuantity(product.quantity.toString());
-    setPrice(product.price.toString());
-    setDescription(product.description);
+    setImage(product?.image);
+    setTitle(product?.title);
+    setSku(product?.sku);
+    setQuantity(product?.quantity.toString());
+    setPrice(product?.price.toString());
+    setDescription(product?.description);
   }, []);
 
   return (
