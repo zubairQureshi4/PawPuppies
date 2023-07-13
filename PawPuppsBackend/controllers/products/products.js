@@ -4,6 +4,7 @@ module.exports.addProduct = async (req, res) => {
     try{
 
         const {title, sku, price, image} = req.body;
+        console.log(image)
 
         if(!title || !sku || !price) return res.send("Fields are empty")
 

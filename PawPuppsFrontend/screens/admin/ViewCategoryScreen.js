@@ -178,7 +178,7 @@ const ViewCategoryScreen = ({ navigation, route }) => {
             navigation.navigate("addcategories", { authUser: authUser });
           }}
         >
-          <AntDesign name="plussquare" size={30} color={colors.muted} />
+          <AntDesign name="plussquare" size={30} color= "#FFC8B2" />
         </TouchableOpacity>
       </View>
       <View style={styles.screenNameContainer}>
@@ -275,10 +275,11 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   screenNameParagraph: {
     marginTop: 5,
     fontSize: 15,
+    color: "#008000"
   },
 });

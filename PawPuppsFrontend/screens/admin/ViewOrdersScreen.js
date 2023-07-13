@@ -210,10 +210,11 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   screenNameParagraph: {
     marginTop: 5,
     fontSize: 15,
+    color: "#008000",
   },
 });

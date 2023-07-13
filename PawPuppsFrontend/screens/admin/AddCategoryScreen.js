@@ -115,7 +115,7 @@ const AddCategoryScreen = ({ navigation, route }) => {
           <Text style={styles.screenNameText}>Add Category</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>Add category details</Text>
+          <Text style={styles.screenNameParagraph}>Add category details by Admin</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -198,11 +198,12 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   screenNameParagraph: {
     marginTop: 5,
     fontSize: 15,
+    color: "#008000"
   },
   imageContainer: {
     display: "flex",

@@ -160,7 +160,7 @@ const ViewProductScreen = ({ navigation, route }) => {
             navigation.navigate("addproduct", { authUser: authUser });
           }}
         >
-          <AntDesign name="plussquare" size={30} color={colors.muted} />
+          <AntDesign name="plussquare" size={30} color= "#FFC8B2" />
         </TouchableOpacity>
       </View>
       <View style={styles.screenNameContainer}>
@@ -192,7 +192,7 @@ const ViewProductScreen = ({ navigation, route }) => {
             return (
               <ProductList
                 key={index}
-                image={product?.image}
+                image={`${network.serverip}/uploads/${product?.image}`}
                 title={product?.title}
                 category={product?.category?.title}
                 price={product?.price}
@@ -266,10 +266,11 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   screenNameParagraph: {
     marginTop: 5,
     fontSize: 15,
+    color: "#008000",
   },
 });

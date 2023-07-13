@@ -182,7 +182,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
   useEffect(() => {
     setQuantity(0);
     setAvaiableQuantity(product.quantity);
-    SetProductImage(product?.image);
+    SetProductImage(`${network.serverip}/uploads/${product?.image}`);
     fetchWishlist();
   }, []);
 

@@ -27,24 +27,24 @@ import { SliderBox } from "react-native-image-slider-box";
 const category = [
   {
     _id: "62fe244f58f7aa8230817f89",
-    title: "Garments",
-    image: require("../../assets/icons/garments.png"),
+    title: "Cats",
+    image: require("../../assets/icons/cats.png"),
   },
   {
     _id: "62fe243858f7aa8230817f86",
-    title: "Electornics",
-    image: require("../../assets/icons/electronics.png"),
+    title: "Dogs",
+    image: require("../../assets/icons/dogs.png"),
   },
   {
     _id: "62fe241958f7aa8230817f83",
-    title: "Cosmentics",
-    image: require("../../assets/icons/cosmetics.png"),
+    title: "Vaccination",
+    image: require("../../assets/icons/cats.png"),
   },
-  {
+ /* {
     _id: "62fe246858f7aa8230817f8c",
     title: "Groceries",
     image: require("../../assets/icons/grocery.png"),
-  },
+  }, */
 ];
 
 const slides = [
@@ -129,12 +129,12 @@ const HomeScreen = ({ navigation, route }) => {
     <View style={styles.container}>
       <StatusBar></StatusBar>
       <View style={styles.topBarContainer}>
-        <TouchableOpacity disabled>
+       {/* <TouchableOpacity disabled>
           <Ionicons name="menu" size={30} color={colors.muted} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={styles.topbarlogoContainer}>
           <Image source={easybuylogo} style={styles.logo} />
-          <Text style={styles.toBarText}>EasyBuy</Text>
+          <Text style={styles.toBarText}>PawPupps</Text>
         </View>
         <TouchableOpacity
           style={styles.cartIconContainer}
@@ -193,12 +193,12 @@ const HomeScreen = ({ navigation, route }) => {
             />
             {/* <CustomInput radius={5} placeholder={"Search...."} /> */}
           </View>
-          <View style={styles.buttonContainer}>
+         {/* <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.scanButton}>
               <Text style={styles.scanButtonText}>Scan</Text>
               <Image source={scanIcon} style={{ width: 20, height: 20 }} />
             </TouchableOpacity>
-          </View>
+            </View>*/}
         </View>
         <ScrollView nestedScrollEnabled={true}>
           <View style={styles.promotiomSliderContainer}>
@@ -207,7 +207,7 @@ const HomeScreen = ({ navigation, route }) => {
               sliderBoxHeight={140}
               dotColor={colors.primary}
               inactiveDotColor={colors.muted}
-              paginationBoxVerticalPadding={10}
+              paginationBoxVerticalPadding={20}
               autoplayInterval={6000}
             />
           </View>
@@ -266,7 +266,7 @@ const HomeScreen = ({ navigation, route }) => {
                   >
                     <ProductCard
                       name={item.title}
-                      image={item?.image}
+                      image={`${network.serverip}/uploads/${item.image}`}
                       price={item.price}
                       quantity={item.quantity}
                       onPress={() => handleProductPress(item)}
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  scanButton: {
+ /* scanButton: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -371,7 +371,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.light,
     fontWeight: "bold",
-  },
+  },*/
   primaryTextContainer: {
     padding: 20,
     display: "flex",
@@ -439,6 +439,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+   /* color: "#AEE8FD", */
   },
   cartItemCountContainer: {
     position: "absolute",

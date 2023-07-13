@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { colors } from "../../constants";
-import garmentsIcon from "../../assets/icons/garments.png";
+
 
 const CustomIconButton = ({ text, image, onPress, active }) => {
   return (

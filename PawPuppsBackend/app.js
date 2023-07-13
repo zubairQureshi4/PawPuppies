@@ -19,10 +19,9 @@ dotenv.config();
 const multer  = require('multer')
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/uploads')
+    cb(null, 'public/uploads/')
   },
   filename: function (req, file, cb) {
-    console.log(file);
     let uploadFile = file.originalname.split('.')
     let name = `${uploadFile[0]}-${Date.now()}.${uploadFile[uploadFile.length-1]}`
     cb(null, name)
@@ -97,40 +96,24 @@ app.get("/admin/order-status",[isAdmin],changeStatusOfOrder)
 app.get("/admin/users",[isAdmin],getAllUsers)
 
 // HELPER
-app.post('/photos/upload', upload.single('photos'), function (req, res, next) {  
+app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  
   // req.files is array of `photos` files
 
   try{
-    let filesab = req.files;
-    if(!filesab){
+    let files = req.files;
+    console.log(req);
+    if(!files.length){
       return res.status(400).json({ err:'Please upload an image', msg:'Please upload an image' })
     }
-    let file = req.files
+    let file = req.files[0]
     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
         return res.json({"image" : file.filename}) 
     }
-    console.log("DONE");
   }
   catch(error){
     return res.send(error.message)
   }
 })
-
-app.get('/photos/:imageName', (req, res) => {
-  try {
-    const imageName = req.params.imageName;
-    // Here, you would retrieve the actual image path based on the imageName
-
-    // For example, if the images are stored in the "public/uploads" folder:
-    const imagePath = path.join(__dirname, 'public/uploads', imageName);
-
-    // Return the image path in the response
-    return res.json({ image: imagePath });
-  } catch (error) {
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
 
 
 // ok

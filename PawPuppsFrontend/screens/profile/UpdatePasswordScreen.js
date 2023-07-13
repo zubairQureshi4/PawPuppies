@@ -75,7 +75,7 @@ const UpdatePasswordScreen = ({ navigation, route }) => {
         </View>
         <View>
           <Text style={styles.screenNameParagraph}>
-            Your new password must be different from previous used password
+            Your new password must be different from previous password
           </Text>
         </View>
       </View>
@@ -137,11 +137,12 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   screenNameParagraph: {
     marginTop: 5,
     fontSize: 15,
+    color: "#008000",
   },
   formContainer: {
     marginTop: 10,

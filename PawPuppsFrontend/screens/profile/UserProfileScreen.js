@@ -32,9 +32,9 @@ const UserProfileScreen = ({ navigation, route }) => {
     <View style={styles.container}>
       <StatusBar style="auto"></StatusBar>
       <View style={styles.TopBarContainer}>
-        <TouchableOpacity>
+       {/* <TouchableOpacity>
           <Ionicons name="menu-sharp" size={30} color={colors.primary} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.screenNameContainer}>
         <Text style={styles.screenNameText}>Profile</Text>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   OptionsContainer: {
     width: "100%",

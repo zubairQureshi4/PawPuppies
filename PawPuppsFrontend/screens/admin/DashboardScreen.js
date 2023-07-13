@@ -125,22 +125,22 @@ const DashboardScreen = ({ navigation, route }) => {
               navigation.replace("login");
             }}
           >
-            <Ionicons name="log-out" size={30} color={colors.muted} />
+            <Ionicons name="log-out" size={30} color= "#FF0000" />
           </TouchableOpacity>
           <View>
             <Text style={styles.toBarText}>Dashboard</Text>
           </View>
-          <TouchableOpacity>
+        {/*<TouchableOpacity>
             <Ionicons
               name="person-circle-outline"
               size={30}
               color={colors.muted}
             />
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
         </View>
         <View style={styles.headingContainer}>
           <MaterialCommunityIcons name="menu-right" size={30} color="black" />
-          <Text style={styles.headingText}>Welcome, Admin</Text>
+          <Text style={styles.headingText}>Welcome, Admin Panel</Text>
         </View>
         <View style={{ height: 370 }}>
           {data && (
@@ -248,6 +248,9 @@ const styles = StyleSheet.create({
   toBarText: {
     fontSize: 15,
     fontWeight: "600",
+    textAlignment: "center",
+    color: "#008000",
+    right: 130,
   },
   cardContainer: {
     flexDirection: "row",
@@ -268,7 +271,7 @@ const styles = StyleSheet.create({
   },
   headingText: {
     fontSize: 20,
-    color: colors.muted,
+    color: "black",
     fontWeight: "800",
   },
   actionContainer: { padding: 20, width: "100%", flex: 1 },

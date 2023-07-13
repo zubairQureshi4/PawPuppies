@@ -118,9 +118,9 @@ const ViewUsersScreen = ({ navigation, route }) => {
             color={colors.muted}
           />
         </TouchableOpacity>
-        <TouchableOpacity disabled>
+        {/* <TouchableOpacity disabledable>
           <AntDesign name="user" size={25} color={colors.primary} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.screenNameContainer}>
         <View>
@@ -210,10 +210,11 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   screenNameParagraph: {
     marginTop: 5,
     fontSize: 15,
+    color: "#008000", 
   },
 });

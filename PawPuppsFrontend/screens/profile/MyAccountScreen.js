@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   OptionsContainer: {
     width: "100%",

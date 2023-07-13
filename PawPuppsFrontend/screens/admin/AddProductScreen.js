@@ -88,7 +88,7 @@ const AddProductScreen = ({ navigation, route }) => {
       .catch((error) => {
         setIsloading(false);
         setError(error.message);
-        console.log("error for category", error);
+        console.log("error", error);
       });
   };
 
@@ -98,29 +98,26 @@ const AddProductScreen = ({ navigation, route }) => {
 
   const upload = async () => {
     console.log("upload-F:", image);
-  
-    const formData = new FormData();
-    formData.append("photos", {
-      uri: image,
-      name: "product.png",
-      type: "image/png",
-    });
-  
-    const requestOptions = {
+
+    var formdata = new FormData();
+    formdata.append("photos", image, "product.png");
+
+    var ImageRequestOptions = {
       method: "POST",
-      body: formData,
+      body: formdata,
       redirect: "follow",
     };
-  
-    try {
-      const response = await fetch("http://192.168.100.8:3000/photos/upload", requestOptions);
-      const result = await response.json();
-      console.log("fetch req", result);
-    } catch (error) {
-      console.log("error for upload", error);
-    }
+
+    fetch(
+      "https://famous-banks-pay.loca.lt/photos/upload",
+      ImageRequestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => console.log("error", error));
   };
-  
 
   var raw = JSON.stringify({
     title: title,
@@ -148,14 +145,16 @@ const AddProductScreen = ({ navigation, route }) => {
       aspect: [1, 1],
       quality: 0.5,
     });
-    if (!result.canceled) {
-      // console.log(result);
+
+    if (!result.cancelled) {
       console.log(result);
       setImage(result.uri);
+      upload();
     }
   };
+
   //Method for imput validation and post data to server to insert product using API call
-  const addProductHandle = async () => {
+  const addProductHandle = () => {
     setIsloading(true);
 
     //[check validation] -- Start
@@ -173,10 +172,10 @@ const AddProductScreen = ({ navigation, route }) => {
       setIsloading(false);
     } else {
       //[check validation] -- End
-      await upload();
-      await fetch(network.serverip + "/product", requestOptions)
+      fetch(network.serverip + "/product", requestOptions)
         .then((response) => response.json())
         .then((result) => {
+          console.log(result);
           if (result.success == true) {
             setIsloading(false);
             setAlertType("success");
@@ -187,7 +186,7 @@ const AddProductScreen = ({ navigation, route }) => {
           setIsloading(false);
           setError(error.message);
           setAlertType("error");
-          console.log("error for product", error);
+          console.log("error", error);
         });
     }
   };
@@ -195,6 +194,7 @@ const AddProductScreen = ({ navigation, route }) => {
   //call the fetch functions initial render
   useEffect(() => {
     fetchCategories();
+    console.log(categories);
   }, []);
 
   return (
@@ -220,7 +220,7 @@ const AddProductScreen = ({ navigation, route }) => {
           <Text style={styles.screenNameText}>Add Product</Text>
         </View>
         <View>
-          <Text style={styles.screenNameParagraph}>Add product details</Text>
+          <Text style={styles.screenNameParagraph}>Add product details by Admin</Text>
         </View>
       </View>
       <CustomAlert message={error} type={alertType} />
@@ -239,7 +239,7 @@ const AddProductScreen = ({ navigation, route }) => {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
-                <AntDesign name="pluscircle" size={50} color={colors.muted} />
+                <AntDesign name="pluscircle" size={50} color= "#FFC8B2" />
               </TouchableOpacity>
             )}
           </View>
@@ -248,14 +248,14 @@ const AddProductScreen = ({ navigation, route }) => {
             value={sku}
             setValue={setSku}
             placeholder={"SKU"}
-            placeholderTextColor={colors.muted}
+            placeholderTextColor= "black"
             radius={5}
           />
           <CustomInput
             value={title}
             setValue={setTitle}
             placeholder={"Title"}
-            placeholderTextColor={colors.muted}
+            placeholderTextColor= "black"
             radius={5}
           />
           <CustomInput
@@ -263,7 +263,7 @@ const AddProductScreen = ({ navigation, route }) => {
             setValue={setPrice}
             placeholder={"Price"}
             keyboardType={"number-pad"}
-            placeholderTextColor={colors.muted}
+            placeholderTextColor= "black"
             radius={5}
           />
           <CustomInput
@@ -271,14 +271,14 @@ const AddProductScreen = ({ navigation, route }) => {
             setValue={setQuantity}
             placeholder={"Quantity"}
             keyboardType={"number-pad"}
-            placeholderTextColor={colors.muted}
+            placeholderTextColor= "black"
             radius={5}
           />
           <CustomInput
             value={description}
             setValue={setDescription}
             placeholder={"Description"}
-            placeholderTextColor={colors.muted}
+            placeholderTextColor= "black"
             radius={5}
           />
         </View>
@@ -355,11 +355,12 @@ const styles = StyleSheet.create({
   screenNameText: {
     fontSize: 30,
     fontWeight: "800",
-    color: colors.muted,
+    color: "black",
   },
   screenNameParagraph: {
     marginTop: 5,
     fontSize: 15,
+    color: "#008000",
   },
   imageContainer: {
     display: "flex",
