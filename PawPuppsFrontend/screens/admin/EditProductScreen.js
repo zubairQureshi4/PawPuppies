@@ -42,7 +42,6 @@ const EditProductScreen = ({ navigation, route }) => {
     price: price,
     image: image,
     description: description,
-    category: category,
     quantity: quantity,
   });
 
@@ -84,7 +83,7 @@ const EditProductScreen = ({ navigation, route }) => {
       setError("Please upload the product image");
       setIsloading(false);
     } else {
-      console.log(`${network.serverip}"/update-product?id=${product._id}"`);
+      console.log(`${network.serverip}/update-product?id=${product._id}"`);
       fetch(
         `${network.serverip}/update-product?id=${product._id}`,
         requestOptions
@@ -93,6 +92,7 @@ const EditProductScreen = ({ navigation, route }) => {
         .then((result) => {
           if (result.success == true) {
             setIsloading(false);
+            setAlertType("success");
             setError(result.message);
             setPrice("");
             setQuantity("");
@@ -110,7 +110,7 @@ const EditProductScreen = ({ navigation, route }) => {
 
   // set all the input fields and image on initial render
   useEffect(() => {
-    setImage(`${network.serverip}/uploads/${product?.image}`);
+    setImage(product?.image);
     setTitle(product.title);
     setSku(product.sku);
     setQuantity(product.quantity.toString());
@@ -144,7 +144,7 @@ const EditProductScreen = ({ navigation, route }) => {
           <Text style={styles.screenNameParagraph}>Edit product details</Text>
         </View>
       </View>
-      <CustomAlert message={error} type={"error"} />
+      <CustomAlert message={error} type={alertType} />
       <ScrollView style={{ flex: 1, width: "100%" }}>
         <View style={styles.formContainer}>
           <View style={styles.imageContainer}>

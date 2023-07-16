@@ -67,7 +67,7 @@ app.post("/reset-password/:id", resetPassword) //ok
 // Products
 app.post("/product", [isAdmin], addProduct)
 app.get("/products", getAllProducts)
-app.post("/update-product", [isAdmin], updateProduct)
+app.post("/update-product", updateProduct)
 app.get("/delete-product", [isAdmin], deleteProduct)
 
 

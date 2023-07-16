@@ -52,7 +52,6 @@ module.exports.updateCategory = async (req, res) => {
 
         if(category){
             const updatedCategory = await categoryModel.findOneAndUpdate({_id : id}, req.body, {new :true})
-
             return res.json({
                 success : true,
                 status : 200,  
