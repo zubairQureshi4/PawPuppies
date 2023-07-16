@@ -37,6 +37,7 @@ const UpdatePasswordScreen = ({ navigation, route }) => {
       setError("Password not matched");
     } else {
       setError("");
+      console.log( network.serverip + "/reset-password?id=" + String(userID));
       fetch(
         network.serverip + "/reset-password?id=" + String(userID),
         requestOptions

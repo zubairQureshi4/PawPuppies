@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
     email: String,
     userType: String,
     password: String,
+    profilePic: String,
     token: String,
     wishlist: [{ productId: { type: mongoose.Schema.Types.ObjectId, ref: "product" }, quantity: Number }]
 

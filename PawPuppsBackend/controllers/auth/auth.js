@@ -49,6 +49,7 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.register = async (req, res) => {
+  console.log(req.body);
   try {
     const { email, password } = req.body;
     // if any one of the field from email and password is not filled
@@ -75,6 +76,8 @@ module.exports.register = async (req, res) => {
 
 //////////// we are not considering below code yet
 module.exports.updateUser = async (req, res) => {
+console.log(req.params);
+console.log(req.body);
   try {
 
     const userDataToBeUpdated = req.body;
