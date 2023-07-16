@@ -147,7 +147,7 @@ import {
           </View>
         </View>
         <CustomAlert message={error} type={alertType} />
-        {wishlist.length == 0 ? (
+        {wishlist?.length == 0 ? (
           <View style={styles.ListContiainerEmpty}>
             <Text style={styles.secondaryTextSmItalic}>
               "There are no product in wishlist yet."
