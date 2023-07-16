@@ -4,6 +4,7 @@ import {
   View,
   StatusBar,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import UserProfileCard from "../../components/UserProfileCard/UserProfileCard";
@@ -23,10 +24,10 @@ const UserProfileScreen = ({ navigation, route }) => {
       setUserInfo(obj);
     }
   };
-
   // covert  the user to Json object on initial render
   useEffect(() => {
     convertToJSON(user);
+    console.log(user);
   }, []);
   return (
     <View style={styles.container}>
@@ -40,11 +41,18 @@ const UserProfileScreen = ({ navigation, route }) => {
         <Text style={styles.screenNameText}>Profile</Text>
       </View>
       <View style={styles.UserProfileCardContianer}>
+        {user?.profilePic ? 
+          <Image
+              source={{ uri: user?.profilePic }}
+              style={{ width: 200, height: 200 }}
+            />
+        : 
         <UserProfileCard
           Icon={Ionicons}
           name={userInfo?.name}
           email={userInfo?.email}
         />
+        }
       </View>
       <View style={styles.OptionsContainer}>
         <OptionList

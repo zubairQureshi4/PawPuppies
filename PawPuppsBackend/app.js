@@ -58,7 +58,7 @@ app.post("/login", login) // ok
 
 
 // User Routes
-app.patch("/update-user/:id", updateUser) //ok
+app.post("/updateUser/:id", updateUser) //ok
 app.get("/user/:id", userById) //ok
 app.get("/delete-user/:id", deleteUser) //ok
 app.post("/reset-password/:id", resetPassword) //ok
@@ -93,7 +93,7 @@ app.get("/remove-from-wishlist",[checkAuth],removeFromWishlist)
 app.get("/dashboard",[isAdmin],dashboardData)
 app.get("/admin/orders",[isAdmin],getAllOrders)
 app.get("/admin/order-status",[isAdmin],changeStatusOfOrder)
-app.get("/admin/users",[isAdmin],getAllUsers)
+app.get("/admin/users",getAllUsers)
 
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  

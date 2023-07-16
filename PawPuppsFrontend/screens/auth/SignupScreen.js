@@ -32,6 +32,7 @@ const SignupScreen = ({ navigation }) => {
     password: password,
     name: name,
     userType: "USER",
+    profilePic: ""
   });
 
   var requestOptions = {
@@ -64,6 +65,7 @@ const SignupScreen = ({ navigation }) => {
     if (password != confirmPassword) {
       return setError("password does not match");
     }
+    console.log(requestOptions);
    await fetch(network.serverip + "/register", requestOptions) // API call
     .then((response) => navigation.navigate("login"))
       .catch((error) => console.warn(error));

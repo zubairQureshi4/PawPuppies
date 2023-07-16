@@ -5,20 +5,40 @@ import {
   StatusBar,
   TouchableOpacity,
   Alert,
+  Image,
+  Button,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserProfileCard from "../../components/UserProfileCard/UserProfileCard";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import OptionList from "../../components/OptionList/OptionList";
-import { network } from "../../constants";
+import { colors, network } from "../../constants";
+import * as ImagePicker from "expo-image-picker";
+import { AntDesign } from "@expo/vector-icons";
+import axios from "axios";
 
 const MyAccountScreen = ({ navigation, route }) => {
   const [showBox, setShowBox] = useState(true);
+  const [image, setImage] = useState("");
   const [error, setError] = useState("");
   const { user } = route.params;
   const userID = user["_id"];
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.5,
+    });
 
+    if (!result.cancelled) {
+      console.log(result);
+      setImage(result.uri);
+      upload();
+    }
+  };
   //method for alert
   const showConfirmDialog = (id) => {
     return Alert.alert(
@@ -60,6 +80,17 @@ const MyAccountScreen = ({ navigation, route }) => {
       })
       .catch((error) => console.log("error", error));
   };
+
+  const updateUserImage = async () => {
+    await axios
+      .post(network.serverip + "/updateUser/" + userID, { profilePic: image })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    setImage(user?.image);
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto"></StatusBar>
@@ -79,12 +110,19 @@ const MyAccountScreen = ({ navigation, route }) => {
       <View style={styles.screenNameContainer}>
         <Text style={styles.screenNameText}>My Account</Text>
       </View>
-      <View style={styles.UserProfileCardContianer}>
-        <UserProfileCard
-          Icon={Ionicons}
-          name={user["name"]}
-          email={user["email"]}
-        />
+      <View style={styles.imageContainer}>
+        {image ? (
+          <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
+            <Image
+              source={{ uri: image }}
+              style={{ width: 200, height: 200 }}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.imageHolder} onPress={pickImage}>
+            <AntDesign name="pluscircle" size={50} color="#FFC8B2" />
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.OptionsContainer}>
         <OptionList
@@ -104,6 +142,12 @@ const MyAccountScreen = ({ navigation, route }) => {
           iconName={"delete"}
           type={"danger"}
           onPress={() => showConfirmDialog(userID)}
+        />
+        <Button
+          title="Update Image"
+          onPress={() => {
+            updateUserImage();
+          }}
         />
       </View>
     </View>
@@ -149,5 +193,30 @@ const styles = StyleSheet.create({
   },
   OptionsContainer: {
     width: "100%",
+  },
+  imageHolder: {
+    marginTop: 15,
+    height: 150,
+    width: 200,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.light,
+    borderRadius: 10,
+    elevation: 5,
+    marginBottom: 15,
+  },
+  imageContainer: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "100%",
+    height: 250,
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    elevation: 5,
+    paddingLeft: 20,
+    paddingRight: 20,
+    margin: 15,
   },
 });
